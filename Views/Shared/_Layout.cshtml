@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>@ViewData["CurrentPage"] - MyFreshlyBakedMVCWebApp</title>
+
+    <!--Bootstrap CSS Will Be Here Below -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- My Main and Custom CSS Will Be Here Below -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyFreshlyBakedMVCWebApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+   
+   
+    <div class="container">
+        <!-- Main Section Here Below-->
+        <div>
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+   
+
+   
+ 
+   
+<!-- Bootstrap JS Will Be Here Below-->
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- My Main and Custom JS Will Be Here Below -->
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
