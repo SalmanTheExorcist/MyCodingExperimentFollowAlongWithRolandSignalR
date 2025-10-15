@@ -6,20 +6,32 @@
 })();
 
 /* ------------------------------------------------------- */
+let myVideoElemntData = {
+    isActive: false,
+    trackInfo: {}
+    };
 const btnStarTheAction = async function () {
   logToConsole("Inside: btnStarTheAction()");
-
+  
   
   try {
-    const mediaStream = await navigator.mediaDevices.getUserMedia(
+    //const mediaStream = 
+    await navigator.mediaDevices.getUserMedia(
         { 
           video: true,
           audio: false 
-        }
-      
-      );
-    const videoMyWebCam = document.getElementById('videoMyWebCam');
-    videoMyWebCam.srcObject = mediaStream;
+        }      
+      ).then(mediaStream => {
+        const videoMyWebCam = document.getElementById('videoMyWebCam');   
+        videoMyWebCam.srcObject = mediaStream;
+        myVideoElemntData.isActive = true;
+        myVideoElemntData.trackInfo = mediaStream.getVideoTracks()[0].getSettings();
+
+        console.dir('myVideoElemntData:', JSON.stringify(myVideoElemntData.trackInfo,null,2));
+
+      });
+   
+
   } catch (error) {
     console.error('Error accessing webcam: ', error);
   }
