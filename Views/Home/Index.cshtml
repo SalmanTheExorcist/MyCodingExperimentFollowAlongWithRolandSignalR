@@ -20,9 +20,13 @@
         <button type="button" id="btnPlayVideo" class="btn btn-primary">
             Start The Action
         </button>
-        <button type="button" id="btnStopVideo" class="btn btn-secondary">
+        <button type="button" id="btnStopVideo" class="disabled btn btn-secondary">
             Stop
         </button>
+        <button type="button" id="btnCaptureImageFromVideo" class="disabled btn btn-info">
+            Capture Image
+        </button>       
+
     </div>
 
     <div class"d-flex flex-column">
@@ -32,8 +36,12 @@
         
     </div>
 
+    <!-- Canvas is hidden, used to hold the captured Image -->
+    <div class"d-flex flex-column">
+        <canvas id="myCanvas" class="visually-hidden"></canvas>
+        <img id="imgCapturedFromVideo" alt="Captured Image From Video Element"/>
 
-
+    </div>
 
 
     </p>
@@ -52,7 +60,7 @@
             logToConsole("Index DOMContentLoaded!");
 
             // myInitializeSignalRConnection();
-            logToConsole(myConnection);
+            logToConsole(JSON.stringify(myConnection));
 
             myInitializeIndexPageStuff();
         });
