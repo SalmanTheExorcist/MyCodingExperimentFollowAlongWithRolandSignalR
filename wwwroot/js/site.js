@@ -56,7 +56,48 @@ const myInitializeSignalRConnection = function () {
 
 };
 /* ------------------------------------------------------- */
+const myInitializeImageRelatedStuff = function(){
+   logToConsole("Inside: myInitializeImageRelatedStuff()");
+   const allowedExtensions =  ['jpg', 'jpeg', 'png', 'gif'];
 
+   let fileSomeImage = document.getElementById("fileSomeImage");
+
+  fileSomeImage.addEventListener("change",function(event){
+
+      
+      var singleFile = fileSomeImage.files[0];
+      var singleFileName = singleFile.name.toLowerCase();
+      var singleFileExtension = singleFileName
+                      .substring(singleFileName.lastIndexOf('.') + 1);
+
+      var txtOutputMessage = "";
+      var boolFileIsGoodToGo = true;
+
+      if(allowedExtensions.includes(singleFileExtension)){
+        txtOutputMessage += "File extention is Good<br/>";
+        if(singleFile.size > 10000000){
+          txtOutputMessage += "File Size Exceeds 10MB<br/>";
+          boolFileIsGoodToGo = false;
+        }
+      }
+      else{
+        txtOutputMessage += `File extension ${singleFileExtension} Not Allowed!`;
+         boolFileIsGoodToGo = false;
+      };          
+
+      setResultsInnerText(txtOutputMessage);
+
+      if(boolFileIsGoodToGo){
+        //Do more stuff with the selected File/Picture
+
+      }
+  });
+
+}
+
+
+
+/* ------------------------------------------------------ */
 const myInitializeIndexPageStuff = function () {
   logToConsole("Inside: myInitializeIndexPageStuff()");
 
@@ -131,6 +172,15 @@ const myInitializeIndexPageStuff = function () {
 
      
   }
+/* ------------------------------------------------------- */
+
+function setResultsInnerText(strValue){
+  console.log(`setResultsInnerText(strValue): ${strValue}`);
+
+   let txtResultsFileSelection = document.getElementById("txtResultsFileSelection");
+   txtResultsFileSelection.innerHTML = strValue;
+}
+
 /* ------------------------------------------------------- */
 function setVideoTimeDisplay(strValue){
   txtVideoTimeDisplay.innerText = strValue;
