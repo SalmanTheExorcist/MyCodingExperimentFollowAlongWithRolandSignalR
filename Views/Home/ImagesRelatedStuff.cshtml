@@ -17,19 +17,27 @@
 
     <div class="flex-column fs-4 fw-bolder">
         <label for="fileSomeImage">Choose A Photo:</label>
-        <input type="file" 
-            id="fileSomeImage" 
-            name="fileSomeImage" 
-            accept="image/png, image/jpeg" 
-        />
+        <input type="file" id="fileSomeImage" name="fileSomeImage"
+            accept="image/png, image/jpeg, image/jpg ,image/gif" />
     </div>
     <div class"d-flex flex-column">
         <div class="display-6">
-           <span id="txtResultsFileSelection"></span>
+            <span id="txtResultsFileSelection"></span>
         </div>
 
     </div>
-
+    <div class"d-flex flex-column">
+        <img src="" 
+            alt="Image From Input File Element."
+            class="rounded mx-auto d-block w-50"
+            id="imageFromInputFile"/>
+        <button type="button" 
+            class="btn btn-primary"
+            id="btnPrintBase64"
+            onclick="btnPrintBase64_click()">
+            Print Base64URL
+        </button>
+    </div>
 
 </div>
 
