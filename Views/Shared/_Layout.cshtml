@@ -1,20 +1,77 @@
 ﻿<!DOCTYPE html>
 <html lang="en-GB" dir="ltr">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>@ViewData["CurrentPage"] - MyFreshlyBakedMVCWebApp</title>
+    <title>@ViewData["CurrentPage"] - MyFreshlyBakedMVCWebApp</title>
 
     <!--Bootstrap CSS Will Be Here Below -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
 
     <!-- My Main and Custom CSS Will Be Here Below -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MyFreshlyBakedMVCWebApp.styles.css" asp-append-version="true" />
 </head>
+
 <body>
-   
-   
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <header class="pb-3">
+                <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" data-bs-theme="dark">
+                    <div class="container">
+
+                        <a class="navbar-brand" asp-area="" asp-page="/Index">
+                            <img class="d-inline-block align-top" width="30px" height="30px"
+                                src="~/images/mrcatadventureImages/MyCatManticsLogo_ForWeb.jpg"
+                                alt="Mr.Cat logo for navbar brand." />
+                            Mr.Cat's SignalR Experiments with Roland
+                        </a>
+
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+
+
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <ul class="nav navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="@(ViewData["CurrentPage"] == "Index" ? "nav-link active" : "nav-link")"
+                                        asp-area="" asp-controller="Home" asp-action="Index">
+                                        <i class="bi bi-house-door"></i>
+                                        Home
+                                    </a>
+                                </li>
+                                <!------------------------------------------------------>
+
+                                <li class="nav-item">
+                                    <a class="@(ViewData["CurrentPage"] == "ImagesRelatedStuff" ? "nav-link active" : "nav-link")"
+                                        asp-area="" asp-controller="Home" asp-action="ImagesRelatedStuff">
+                                        <i class="bi bi-camera"></i>
+                                        Images Related
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!-- -------------------------------------------------- -->
     <div class="container">
         <!-- Main Section Here Below-->
         <div>
@@ -23,18 +80,19 @@
             </main>
         </div>
     </div>
-   
-
-   
- 
-   
-<!-- Bootstrap JS Will Be Here Below-->
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 
-<!-- My Main and Custom JS Will Be Here Below -->
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+
+
+
+    <!-- Bootstrap JS Will Be Here Below-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- My Main and Custom JS Will Be Here Below -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
+
 </html>

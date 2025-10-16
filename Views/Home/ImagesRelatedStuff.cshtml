@@ -1,0 +1,50 @@
+@{
+    ViewData["CurrentPage"] = "ImagesRelatedStuff";
+}
+
+<!-- Title -->
+<div class="d-flex flex-column text-center my-5">
+    <h1 class="display-2 fw-bolder">
+        @ViewData["CurrentPage"]
+    </h1>
+    <p class="fs-4 text-muted lh-1">
+        <!-- Some Paragraph Here if We Need To. -->
+    </p>
+</div>
+
+
+<div class="d-flex flex-column text-center my-1">
+
+    <div class="flex-column fs-4 fw-bolder">
+        <label for="fileSomeImage">Choose A Photo:</label>
+        <input type="file" 
+            id="fileSomeImage" 
+            name="fileSomeImage" 
+            accept="image/png, image/jpeg" 
+        />
+    </div>
+    <div class"d-flex flex-column">
+        <div class="display-6">
+           <span id="txtResultsFileSelection"></span>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            logToConsole("ImageRelatedStuff DOMContentLoaded!");
+
+            //myInitializeImageRelatedStuff();
+        });
+    </script>
+}
