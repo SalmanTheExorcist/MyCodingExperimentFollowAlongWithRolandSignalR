@@ -1,4 +1,7 @@
 using MyFreshlyBakedMVCWebApp.Hubs;
+using MyFreshlyBakedMVCWebApp.Models;
+using MyFreshlyBakedMVCWebApp.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSignalR(o => o.EnableDetailedErrors = true);
+
+builder.Services.AddSingleton<IMyPhotoFancyRepository, MyPhotoFancyInMemoryRepository>();
 
 
 var app = builder.Build();
@@ -28,6 +33,20 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+app.MapPost("myphotofancy", (MyPhotoFancy myPhotoFancy, IMyPhotoFancyRepository myRepo) =>
+{
+    myRepo.UpdateExistingMyPhotoFancy(myPhotoFancy);
+    return Results.Ok();
+});
+
+app.MapGet("myphotofancy", (IMyPhotoFancyRepository myRepo) =>
+{
+    return Results.Ok(myRepo.GetAll());
+    
+});
+
 
 
 app.MapHub<MySuperFancyHub>("/mysuperfancyhub");

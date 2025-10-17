@@ -1,16 +1,20 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyFreshlyBakedMVCWebApp.Models;
+using MyFreshlyBakedMVCWebApp.Repositories;
 
 namespace MyFreshlyBakedMVCWebApp.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IMyPhotoFancyRepository _myPhotoFancyRepository;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger,
+                          IMyPhotoFancyRepository myPhotoFancyRepository)
     {
         _logger = logger;
+        _myPhotoFancyRepository = myPhotoFancyRepository;
     }
 
     public IActionResult Index()
@@ -18,12 +22,18 @@ public class HomeController : Controller
         return View();
     }
 
-  
+
     public IActionResult ImagesRelatedStuff()
     {
         return View();
     }
 
+    public IActionResult MyFancyPlayground()
+    {
+        var listMyPhotoFancies = _myPhotoFancyRepository.GetAll();
+        return View(listMyPhotoFancies);
+    }
+    
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
