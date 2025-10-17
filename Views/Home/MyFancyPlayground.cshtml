@@ -5,7 +5,7 @@
 
 <!-- Title -->
 <div class="d-flex flex-column text-center my-5">
-     <h1 class="display-2 fw-bolder">
+    <h1 class="display-2 fw-bolder">
         @ViewData["CurrentPage"]
     </h1>
     <p class="fs-4 text-muted lh-1">
@@ -13,20 +13,66 @@
     </p>
 </div>
 
+<!-- ----------------------------------------------------- -->
+
+<div class="d-flex flex-column text-center my-1">
+    <div class="d-flex flex-column">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item-Name</th>
+                    <th>Description</th>
+                    <th class="textright">Current PhotoFancy</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var singleMyPhotoFancy in Model)
+                {
+                    <tr id="@singleMyPhotoFancy.Id-tr" class="align-middle">
+                        <td>@singleMyPhotoFancy.FancyTitle</td>
+                        <td>@singleMyPhotoFancy.FancyDescription</td>
+                        <td>
+                            <img src="@singleMyPhotoFancy.FancyBase64URL"
+                                alt="@singleMyPhotoFancy.FancyTitle - @singleMyPhotoFancy.FancyDescription"
+                                class="rounded mx-auto d-block MyPhotoFancyImage">
+                        </td>
+                        <td>
+                            <input type="file" onchange="imageSelectionChanged(@singleMyPhotoFancy.Id)"
+                                accept="image/png, image/jpeg, image/jpg ,image/gif" />
+
+
+                            <img id="@singleMyPhotoFancy.Id-imgage" src="@singleMyPhotoFancy.FancyBase64URL"
+                                alt="@singleMyPhotoFancy.FancyTitle - New Photo"
+                                class="rounded mx-auto d-block MyPhotoFancyImage">
+
+                            <button class="btn btn-primary" type="button"
+                                onclick="submitFancyPhoto(@singleMyPhotoFancy.Id)">
+                                Submit New FancyPhoto
+                            </button>
+                            <div class="d-flex flex-column">
+                                <span id="@singleMyPhotoFancy.Id-resultsSpan" class="fw-bolder"></span>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 
 
 
 
-
-
-
+<!-- ------------------------------------------------------- -->
 
 @section Scripts {
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
 
-     <script src="~/js/home-myfancyplayground.js" asp-append-version="true"></script>
+    <script src="~/js/home-myfancyplayground.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function () {
