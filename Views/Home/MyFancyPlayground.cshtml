@@ -17,7 +17,7 @@
 
 <div class="d-flex flex-column text-center my-1">
     <div class="d-flex flex-column">
-        <table class="table">
+        <table class="table table-info table-striped">
             <thead>
                 <tr>
                     <th>Item-Name</th>
@@ -38,15 +38,18 @@
                                 class="rounded mx-auto d-block MyPhotoFancyImage">
                         </td>
                         <td>
-                            <input type="file" onchange="imageSelectionChanged(@singleMyPhotoFancy.Id)"
+                            <input type="file" 
+                                id="@singleMyPhotoFancy.Id-input"
+                                onchange="imageSelectionChanged(@singleMyPhotoFancy.Id)"
                                 accept="image/png, image/jpeg, image/jpg ,image/gif" />
 
 
-                            <img id="@singleMyPhotoFancy.Id-imgage" src="@singleMyPhotoFancy.FancyBase64URL"
+                            <img id="@singleMyPhotoFancy.Id-image" src="@singleMyPhotoFancy.FancyBase64URL"
                                 alt="@singleMyPhotoFancy.FancyTitle - New Photo"
-                                class="rounded mx-auto d-block MyPhotoFancyImage">
+                                class="rounded mx-auto d-block MyPhotoFancyImage border border-3 border-primary">
 
-                            <button class="btn btn-primary" type="button"
+                            <button class="btn btn-primary disabled" type="button"
+                                id="@singleMyPhotoFancy.Id-btnSubmitFancyPhoto"
                                 onclick="submitFancyPhoto(@singleMyPhotoFancy.Id)">
                                 Submit New FancyPhoto
                             </button>

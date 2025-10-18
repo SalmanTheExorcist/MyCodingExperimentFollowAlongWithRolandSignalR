@@ -26,6 +26,17 @@ const myInitializeSignalRConnection = function () {
 
 };
 /* ------------------------------------------------------- */
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+/* ------------------------------------------------------- */
 
 
   function logToConsole(strLogMessage){
@@ -36,8 +47,8 @@ const myInitializeSignalRConnection = function () {
     const currentDate = new Date(timestamp);
 
     // Formatting date 
-    const formattedDate = currentDate.toLocaleString();
-
+    const formattedDate = formatDate(currentDate);
+  
      console.log(`${formattedDate}: ${strLogMessage}`);
 
      
