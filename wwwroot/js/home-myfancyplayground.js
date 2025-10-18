@@ -11,7 +11,12 @@ const myInitializeSignalRConnection = () => {
     logToConsole("Inside: myInitializeSignalRConnection()");
 
     const mySignalRConnection = new signalR.HubConnectionBuilder()
-        .withUrl("/mysuperfancyhub")
+        .withUrl("/mysuperfancyhub",
+              {
+                transport: signalR.HttpTransportType.WebSockets,
+                skipNegotiation: true
+            }
+        )
         .configureLogging(signalR.LogLevel.Information)
         .build();
 
