@@ -8,7 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSignalR(o => o.EnableDetailedErrors = true);
+builder.Services.AddSignalR(options =>
+    {
+        options.EnableDetailedErrors = true;
+        options.MaximumReceiveMessageSize = 1024 * 1024 * 1024;
+        
+        
+    }
+);
+
+
 
 builder.Services.AddSingleton<IMyPhotoFancyRepository, MyPhotoFancyInMemoryRepository>();
 

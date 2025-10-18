@@ -8,23 +8,8 @@
 /* ------------------------------------------------------- */
 
 
-//--A function/method to initialize our SIgnalR Connection
-//---The SignalR connection is always initiated by the client.
-let myConnection = {};
 
-const myInitializeSignalRConnection = function () {
-  logToConsole("Inside: myInitializeSignalRConnection()");
 
-  const mySignalRConnection = new signalR.HubConnectionBuilder()
-    .withUrl("/mysuperfancyhub")
-    .build();
-  mySignalRConnection.start()
-    .catch(someError => console.log(someError.toString()));
-
-  //return mySignalRConnection;                     
-  myConnection = mySignalRConnection;
-
-};
 /* ------------------------------------------------------- */
 function formatDate(date) {
     const year = date.getFullYear();

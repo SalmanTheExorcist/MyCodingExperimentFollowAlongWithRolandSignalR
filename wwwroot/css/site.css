@@ -10,3 +10,15 @@ body
     max-width: 100px;
 
 }
+
+
+@keyframes highlight {
+    50% {
+        background-color: yellow;
+    }
+}
+
+.animate-highlight td {
+    animation-name: highlight;
+    animation-duration: 2s;
+}
