@@ -6,14 +6,47 @@ const myInitializeMyFancyPlaygroundPageStuff = function () {
 const submitFancyPhoto = function (singleMyPhotoFancyId) {
     logToConsole(`submitFancyPhoto(): ${singleMyPhotoFancyId}`);
 
-    // const bid = document.getElementById(auctionId + "-input").value;
+    let imageFromInputFile = document.getElementById(singleMyPhotoFancyId + "-image");
+
+    var myUpdatedPhotoFancy = {
+        id: singleMyPhotoFancyId,
+        fancyBase64URL: "",
+        fancyTitle: "",
+        fancyDescription: ""
+
+    };
+
+    myUpdatedPhotoFancy.fancyDescription = "Submitted On: " + getCurrentDateFormated();
+    myUpdatedPhotoFancy.fancyBase64URL = imageFromInputFile.src;
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify(myUpdatedPhotoFancy);
+    
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+        };
+
+    fetch("/myphotofancy", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+            //logToConsole(result);
+            location.reload();
+        })
+        .catch((error) => logToConsole(error))
+
+
     // fetch("/auction/" + auctionId + "/newbid?currentBid=" + bid, {
     //     method: "POST",
     //     headers: {
     //         'Content-Type': 'application/json'
     //     }
     // });
-    // location.reload();
+   // location.reload();
 }
 //-----------------------------------------------------------------
 

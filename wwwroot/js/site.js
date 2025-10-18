@@ -41,19 +41,24 @@ function formatDate(date) {
 
   function logToConsole(strLogMessage){
 
-     const timestamp = Date.now();
-
-    // Convert timestamp to a readable date and time format
-    const currentDate = new Date(timestamp);
-
-    // Formatting date 
-    const formattedDate = formatDate(currentDate);
-  
+   
+    const formattedDate = getCurrentDateFormated();
+    
      console.log(`${formattedDate}: ${strLogMessage}`);
 
      
   }
 /* ------------------------------------------------------- */
 
+function getCurrentDateFormated()
+{
+    const timestamp = Date.now();
+
+    // Convert timestamp to a readable date and time format
+    const currentDate = new Date(timestamp);
+
+    // Formatting date 
+    return formatDate(currentDate);
+}
 
 
