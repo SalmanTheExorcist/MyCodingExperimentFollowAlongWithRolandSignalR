@@ -33,7 +33,17 @@ public class HomeController : Controller
         var listMyPhotoFancies = _myPhotoFancyRepository.GetAll();
         return View(listMyPhotoFancies);
     }
+
+
+    public IActionResult MyWebCamStreamStartPage()
+    {
+        return View();
+    }
     
+    public IActionResult MyWebCamStreamViewingPage()
+    {
+        return View();
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

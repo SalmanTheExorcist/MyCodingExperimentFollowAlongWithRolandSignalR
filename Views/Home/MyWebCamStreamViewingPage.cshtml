@@ -1,0 +1,40 @@
+@{
+    ViewData["CurrentPage"] = "MyWebCamStreamViewingPage";
+}
+
+<!-- Title -->
+<div class="d-flex flex-column text-center my-5">
+    <h1 class="display-2 fw-bolder">
+        @ViewData["CurrentPage"]
+    </h1>
+    <p class="fs-4 text-muted lh-1">
+        <!-- Some Paragraph Here if We Need To. -->
+    </p>
+</div>
+
+<!-- ----------------------------------------------------- -->
+
+
+
+
+
+
+<!-- ----------------------------------------------------- -->
+@section Scripts {   
+
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+
+    <script src="~/js/home-mywebcamstreamviewingpage.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            logToConsole("MyWebCamStreamViewingPage DOMContentLoaded!");
+
+           myInitializeMyWebCamStreamViewingPagePageStuff();
+
+          
+
+            
+        });
+    </script>
+}

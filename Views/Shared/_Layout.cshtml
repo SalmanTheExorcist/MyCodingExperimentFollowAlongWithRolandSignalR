@@ -64,8 +64,39 @@
                                         Fancy Playground
                                     </a>
                                 </li>
+                                <!------------------------------------------------------>
+                                <!----------WebCamStream Nav DropDown Below Here-------->
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-signal"></i>
+                                       WebCam Stream with SignalR
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="nav-dropdown">
+                                        <li>
+                                            <a class="@(ViewData["CurrentPage"] == "MyWebCamStreamStartPage" ? "dropdown-item active" : "dropdown-item")"
+                                                asp-area="" asp-controller="Home"  asp-action="MyWebCamStreamStartPage">
+                                                
+                                                My WebCam Stream Start Page
+                                               
+                                            </a>
+
+                                        </li>
+                                        <li>
+                                            <a class="@(ViewData["CurrentPage"] == "MyWebCamStreamViewingPage" ? "dropdown-item active" : "dropdown-item")"
+                                                asp-area="" asp-controller="Home" asp-action="MyWebCamStreamViewingPage">
+
+                                                My WebCam Stream Viewing Page
+                                            </a>
+
+                                        </li>
+                                       
+                                    </ul>
+                                </li>
 
 
+                                <!------------------------------------------------------>
                             </ul>
                         </div>
                     </div>
