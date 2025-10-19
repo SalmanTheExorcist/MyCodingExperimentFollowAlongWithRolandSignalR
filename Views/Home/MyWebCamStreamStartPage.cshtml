@@ -3,7 +3,7 @@
 }
 
 <!-- Title -->
-<div class="d-flex flex-column text-center my-5">
+<div class="d-flex flex-column text-center mt-5">
     <h1 class="display-2 fw-bolder">
         @ViewData["CurrentPage"]
     </h1>
@@ -14,14 +14,52 @@
 
 <!-- ----------------------------------------------------- -->
 
+<div class="d-flex flex-column text-center mt-1">
 
+
+    <div class"d-flex flex-column">
+        <button type="button" id="btnPlayVideo" class="btn btn-primary">
+            Start The Action
+        </button>
+        <button type="button" id="btnStopVideo" class="disabled btn btn-secondary">
+            Stop
+        </button>
+        <button type="button" id="btnStartStreamFromVideo" class="disabled btn btn-info">
+           Stream To SignalR Hub
+        </button>
+
+    </div>
+
+    <div class"d-flex flex-column">
+        <div class="display-6">
+            Video Elapsed Time: <span id="txtVideoTimeDisplay">0</span> seconds.
+        </div>
+
+    </div>
+
+    <!-- Canvas is hidden, used to hold the captured Image -->
+    <div class"d-flex flex-column">
+        <canvas id="myCanvas" class="visually-hidden"></canvas>
+
+    </div>
+
+
+    <div class="d-flex flex-column">
+        <video id="videoMyWebCam" autoplay>
+        </video>
+    </div>
+
+
+
+    </p>
+</div>
 
 
 
 
 
 <!-- ----------------------------------------------------- -->
-@section Scripts {   
+@section Scripts {
 
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
 
@@ -31,11 +69,11 @@
         document.addEventListener("DOMContentLoaded", function () {
             logToConsole("MyWebCamStreamStartPage DOMContentLoaded!");
 
-           myInitializeMyWebCamStreamStartPageStuff();
+            myInitializeMyWebCamStreamStartPageStuff();
 
-          
 
-            
+
+
         });
     </script>
 }
