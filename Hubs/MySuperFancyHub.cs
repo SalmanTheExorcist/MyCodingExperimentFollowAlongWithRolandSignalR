@@ -11,10 +11,10 @@ public class MySuperFancyHub : Hub
         await Clients.All.SendAsync("ReceiveNewMyPhotoFancy", myPhotoFancyNotify);
     }
 
-    public void NotifyNewVideoFrame(string strBase64VideoFrameImage)
+    public async Task NotifyNewVideoFrame(string strBase64VideoFrameImage)
     {
-        Console.WriteLine("Hub Method: NotifyNewVideoFrame()");
-       // await Clients.All.SendAsync("ReceiveNewVideoFrame", strBase64VideoFrameImage);
+        //Console.WriteLine("Hub Method: NotifyNewVideoFrame()");
+       await Clients.Others.SendAsync("ReceiveNewVideoFrame", strBase64VideoFrameImage);
     }
 
 }

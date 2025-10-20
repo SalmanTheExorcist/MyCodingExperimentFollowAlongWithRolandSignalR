@@ -16,6 +16,16 @@ const myInitializeSignalRConnection = function () {
         .build();
 
 
+        mySignalRConnection.on("ReceiveNewVideoFrame",
+        (strBase64VideoFrameImage) => {
+
+           let imageForDisplayingVideoFrame = document.getElementById("imageForDisplayingVideoFrame");
+           
+            imageForDisplayingVideoFrame.src = strBase64VideoFrameImage;
+
+        });
+
+
     mySignalRConnection.start().catch((err) => {
         return console.error(err.toString());
     });
