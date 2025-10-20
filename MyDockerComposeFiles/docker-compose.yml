@@ -1,0 +1,15 @@
+version: '3'
+services:
+  your-dotnet-app:
+    image: myfreshlybakedmvcwebapp
+    container_name: dotnet_app
+    ports:
+      - "8080:80"
+
+  nginx:
+    image: custom-nginx
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - your-dotnet-app
