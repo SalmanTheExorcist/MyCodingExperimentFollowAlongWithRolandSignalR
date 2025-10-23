@@ -18,42 +18,45 @@ const myInitializeSignalRConnection = () => {
             }
         )
         .configureLogging(signalR.LogLevel.Information)
+        .withHubProtocol(
+            new signalR.protocols.msgpack.MessagePackHubProtocol()
+        )
         .build();
 
         mySignalRConnection.on("ReceiveMyPhotoFancyAfterCreate",
-                ({ id, fancyBase64URL, fancyTitle, fancyDescription}) => { 
-                   logToConsole(`Newly Added MyPhotoFancy Id: ${id}`);
+                ({ Id, FancyBase64URL, FancyTitle, FancyDescription}) => { 
+                   logToConsole(`Newly Added MyPhotoFancy Id: ${Id}`);
 
                   var tbody = document.querySelector("#myTable>tbody");
-                tbody.innerHTML += `<tr id="${id}-tr" class="align-middle">
-                                    <td>${fancyTitle}</td >
+                tbody.innerHTML += `<tr id="${Id}-tr" class="align-middle">
+                                    <td>${FancyTitle}</td >
                                     <td class="fw-bolder">
-                                       <span id="${id}-descriptionSpan">
-                                            ${fancyDescription}
+                                       <span id="${Id}-descriptionSpan">
+                                            ${FancyDescription}
                                         </span>
                                     </td >
                                     <td>
-                                       <img src="${fancyBase64URL}"
-                                        alt="${fancyTitle} - ${fancyDescription}"
-                                        class="rounded mx-auto d-block MyPhotoFancyImage" id="${id}-imageOriginal">                      
+                                       <img src="${FancyBase64URL}"
+                                        alt="${FancyTitle} - ${FancyDescription}"
+                                        class="rounded mx-auto d-block MyPhotoFancyImage" id="${Id}-imageOriginal">                      
                                     </td>
                                     <td>
-                                         <input type="file" id="${id}-input"
-                                            onchange="imageSelectionChanged(${id})"
+                                         <input type="file" id="${Id}-input"
+                                            onchange="imageSelectionChanged(${Id})"
                                             accept="image/png, image/jpeg, image/jpg ,image/gif" />
 
 
-                                        <img id="${id}-image" src="${fancyBase64URL}"
-                                            alt="${fancyTitle} - New Photo"
+                                        <img id="${Id}-image" src="${FancyBase64URL}"
+                                            alt="${FancyTitle} - New Photo"
                                             class="rounded mx-auto d-block MyPhotoFancyImage border border-3 border-primary">
 
                                         <button class="btn btn-primary disabled" type="button"
-                                            id="${id}-btnSubmitFancyPhoto"
-                                            onclick="submitFancyPhoto(${id})">
+                                            id="${Id}-btnSubmitFancyPhoto"
+                                            onclick="submitFancyPhoto(${Id})">
                                             Submit New FancyPhoto
                                         </button>
                                         <div class="d-flex flex-column">
-                                            <span id="${id}-resultsSpan" class="fw-bolder"></span>
+                                            <span id="${Id}-resultsSpan" class="fw-bolder"></span>
                                         </div>
                                     </td>
                                     </tr>`;
@@ -66,22 +69,22 @@ const myInitializeSignalRConnection = () => {
 
 
     mySignalRConnection.on("ReceiveNewMyPhotoFancy",
-        ({ myPhotoFancyNotifyId, fancyBase64URL, fancyDescription }) => {
+        ({ MyPhotoFancyNotifyId, FancyBase64URL, FancyDescription }) => {
 
            
-            let tr = document.getElementById(myPhotoFancyNotifyId + "-tr");
-            let txtDescriptionSpan = document.getElementById(myPhotoFancyNotifyId + "-descriptionSpan");
-            let imageFromInputFile = document.getElementById(myPhotoFancyNotifyId + "-image");
-            let imageOriginal = document.getElementById(myPhotoFancyNotifyId + "-imageOriginal");
+            let tr = document.getElementById(MyPhotoFancyNotifyId + "-tr");
+            let txtDescriptionSpan = document.getElementById(MyPhotoFancyNotifyId + "-descriptionSpan");
+            let imageFromInputFile = document.getElementById(MyPhotoFancyNotifyId + "-image");
+            let imageOriginal = document.getElementById(MyPhotoFancyNotifyId + "-imageOriginal");
 
 
             //start animation
             tr.classList.add("animate-highlight");
             setTimeout(() => tr.classList.remove("animate-highlight"), 3000);
 
-            txtDescriptionSpan.innerText = fancyDescription;
-            imageFromInputFile.src = fancyBase64URL;
-            imageOriginal.src = fancyBase64URL;
+            txtDescriptionSpan.innerText = FancyDescription;
+            imageFromInputFile.src = FancyBase64URL;
+            imageOriginal.src = FancyBase64URL;
 
         });
 
@@ -264,9 +267,9 @@ const submitFancyPhoto = async function (singleMyPhotoFancyId) {
        
         await myConnection.invoke("NotifyNewMyPhotoFancy",
             {
-                myPhotoFancyNotifyId: parseInt(myUpdatedPhotoFancy.id),
-                fancyBase64URL: myUpdatedPhotoFancy.fancyBase64URL,
-                fancyDescription: myUpdatedPhotoFancy.fancyDescription
+                MyPhotoFancyNotifyId: parseInt(myUpdatedPhotoFancy.id),
+                FancyBase64URL: myUpdatedPhotoFancy.fancyBase64URL,
+                FancyDescription: myUpdatedPhotoFancy.fancyDescription
             }
         );
 

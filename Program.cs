@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using MyFreshlyBakedMVCWebApp.Hubs;
 using MyFreshlyBakedMVCWebApp.Models;
 using MyFreshlyBakedMVCWebApp.Repositories;
+using MessagePack;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,7 @@ builder.Services.AddSignalR(options =>
         
         
     }
-);
+).AddMessagePackProtocol();
 
 
 
