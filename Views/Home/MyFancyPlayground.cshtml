@@ -15,6 +15,11 @@
 
 <!-- ----------------------------------------------------- -->
 
+
+
+
+
+<!-- ----------------------------------------------------- -->
 <div class="d-flex flex-column text-center my-1">
     <div class="d-flex flex-column">
         <table class="table">
@@ -27,24 +32,45 @@
                 </tr>
             </thead>
             <tbody>
+                <tr class="MyAddNewItemRow">
+                    <td colspan="2"><input type="text" id="addItem-title" /></td>
+                    <td>
+                        <input type="file" id="addItem-fileinput"
+                            accept="image/png, image/jpeg, image/jpg ,image/gif" />
+
+
+                        <img id="addItem-image" alt="Add Item - New Photo"
+                            class="rounded mx-auto d-block MyPhotoFancyImage border border-3 border-primary">
+
+
+                        <div class="d-flex flex-column">
+                            <span id="addItem-resultsSpan" class="fw-bolder"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary disabled" id="addItem-btnSubmitNew">
+                            Add
+                        </button>
+                    </td>
+
+                </tr>
+
                 @foreach (var singleMyPhotoFancy in Model)
                 {
                     <tr id="@singleMyPhotoFancy.Id-tr" class="align-middle">
                         <td>@singleMyPhotoFancy.FancyTitle</td>
                         <td class="fw-bolder">
-                           <span id="@singleMyPhotoFancy.Id-descriptionSpan">
+                            <span id="@singleMyPhotoFancy.Id-descriptionSpan">
                                 @singleMyPhotoFancy.FancyDescription
                             </span>
                         </td>
                         <td>
                             <img src="@singleMyPhotoFancy.FancyBase64URL"
                                 alt="@singleMyPhotoFancy.FancyTitle - @singleMyPhotoFancy.FancyDescription"
-                                class="rounded mx-auto d-block MyPhotoFancyImage"
-                                id="@singleMyPhotoFancy.Id-imageOriginal">
+                                class="rounded mx-auto d-block MyPhotoFancyImage" id="@singleMyPhotoFancy.Id-imageOriginal">
                         </td>
                         <td>
-                            <input type="file" 
-                                id="@singleMyPhotoFancy.Id-input"
+                            <input type="file" id="@singleMyPhotoFancy.Id-input"
                                 onchange="imageSelectionChanged(@singleMyPhotoFancy.Id)"
                                 accept="image/png, image/jpeg, image/jpg ,image/gif" />
 
@@ -77,7 +103,7 @@
 
 <!-- ------------------------------------------------------- -->
 
-@section Scripts {   
+@section Scripts {
 
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
 
@@ -87,11 +113,11 @@
         document.addEventListener("DOMContentLoaded", function () {
             logToConsole("MyFancyPlayground DOMContentLoaded!");
 
-           myInitializeMyFancyPlaygroundPageStuff();
+            myInitializeMyFancyPlaygroundPageStuff();
 
-          
 
-            
+
+
         });
     </script>
 }

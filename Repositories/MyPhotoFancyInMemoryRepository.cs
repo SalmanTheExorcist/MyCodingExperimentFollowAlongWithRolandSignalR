@@ -50,7 +50,7 @@ public class MyPhotoFancyInMemoryRepository : IMyPhotoFancyRepository
             }
 
         );
-    //--------------------------------------------------
+        //--------------------------------------------------
         listMyPhotoFancies.Add(
             new MyPhotoFancy
             {
@@ -62,19 +62,38 @@ public class MyPhotoFancyInMemoryRepository : IMyPhotoFancyRepository
 
         );
 
-    //--------------------------------------------------
+        //--------------------------------------------------
     }//--End-Constructor
+
 
     public IEnumerable<MyPhotoFancy> GetAll()
     {
         return listMyPhotoFancies;
     }
+    //------------------------------------
 
     public void UpdateExistingMyPhotoFancy(MyPhotoFancyUpdateDTO myPhotoFancyUpdateDTO)
     {
-       var existingMyPhotoFancy = listMyPhotoFancies
-                                .Single(m => m.Id == myPhotoFancyUpdateDTO.Id);
+        var existingMyPhotoFancy = listMyPhotoFancies
+                                 .Single(m => m.Id == myPhotoFancyUpdateDTO.Id);
         existingMyPhotoFancy.FancyBase64URL = myPhotoFancyUpdateDTO.FancyBase64URL;
         existingMyPhotoFancy.FancyDescription = myPhotoFancyUpdateDTO.FancyDescription;
     }
-}
+    //----------------------------------------
+
+    public MyPhotoFancy AddNewMyPhotoFancy(MyPhotoFancyCreateDTO myPhotoFancyCreateDTO)
+    {
+        var newMyPhotoFancy = new MyPhotoFancy();
+        newMyPhotoFancy.Id = listMyPhotoFancies.Max(p => p.Id) + 1;
+        newMyPhotoFancy.FancyTitle = myPhotoFancyCreateDTO.FancyTitle;
+        newMyPhotoFancy.FancyDescription = myPhotoFancyCreateDTO.FancyDescription;
+        newMyPhotoFancy.FancyBase64URL = myPhotoFancyCreateDTO.FancyBase64URL;
+        listMyPhotoFancies.Add(newMyPhotoFancy);
+        return newMyPhotoFancy;
+        
+    }
+    //-------------------------------
+
+
+
+}//--End-MyPhotoFancyInMemoryRepository

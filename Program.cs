@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.SignalR;
 using MyFreshlyBakedMVCWebApp.Hubs;
 using MyFreshlyBakedMVCWebApp.Models;
 using MyFreshlyBakedMVCWebApp.Repositories;
@@ -45,7 +46,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-app.MapPost("myphotofancy", (MyPhotoFancyUpdateDTO myPhotoFancyUpdateDTO, IMyPhotoFancyRepository myRepo) =>
+app.MapPost("myphotofancy", (MyPhotoFancyUpdateDTO myPhotoFancyUpdateDTO,
+                            IMyPhotoFancyRepository myRepo) =>
 {
     myRepo.UpdateExistingMyPhotoFancy(myPhotoFancyUpdateDTO);
     return Results.Ok();
@@ -55,6 +57,14 @@ app.MapGet("myphotofancy", (IMyPhotoFancyRepository myRepo) =>
 {
     return Results.Ok(myRepo.GetAll());
     
+});
+
+app.MapPost("myphotofancycreate", (MyPhotoFancyCreateDTO myPhotoFancyCreateDTO,
+                            IMyPhotoFancyRepository myRepo,
+                            IHubContext<MySuperFancyHub> hubContext) =>
+{
+   var newMyPhotoFancy =  myRepo.AddNewMyPhotoFancy(myPhotoFancyCreateDTO);
+    hubContext.Clients.All.SendAsync("ReceiveMyPhotoFancyAfterCreate", newMyPhotoFancy);
 });
 
 

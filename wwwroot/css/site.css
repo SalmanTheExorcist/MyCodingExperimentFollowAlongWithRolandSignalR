@@ -11,6 +11,11 @@ body
 
 }
 
+.MyAddNewItemRow td{
+    background-color: aqua;
+    
+}
+
 
 @keyframes highlight {
     50% {
