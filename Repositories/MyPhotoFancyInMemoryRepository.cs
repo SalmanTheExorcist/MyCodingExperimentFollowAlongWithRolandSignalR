@@ -70,11 +70,11 @@ public class MyPhotoFancyInMemoryRepository : IMyPhotoFancyRepository
         return listMyPhotoFancies;
     }
 
-    public void UpdateExistingMyPhotoFancy(MyPhotoFancy updatedMyPhotoFancy)
+    public void UpdateExistingMyPhotoFancy(MyPhotoFancyUpdateDTO myPhotoFancyUpdateDTO)
     {
        var existingMyPhotoFancy = listMyPhotoFancies
-                                .Single(m => m.Id == updatedMyPhotoFancy.Id);
-        existingMyPhotoFancy.FancyBase64URL = updatedMyPhotoFancy.FancyBase64URL;
-        existingMyPhotoFancy.FancyDescription = updatedMyPhotoFancy.FancyDescription;
+                                .Single(m => m.Id == myPhotoFancyUpdateDTO.Id);
+        existingMyPhotoFancy.FancyBase64URL = myPhotoFancyUpdateDTO.FancyBase64URL;
+        existingMyPhotoFancy.FancyDescription = myPhotoFancyUpdateDTO.FancyDescription;
     }
 }

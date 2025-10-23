@@ -45,9 +45,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-app.MapPost("myphotofancy", (MyPhotoFancy myPhotoFancy, IMyPhotoFancyRepository myRepo) =>
+app.MapPost("myphotofancy", (MyPhotoFancyUpdateDTO myPhotoFancyUpdateDTO, IMyPhotoFancyRepository myRepo) =>
 {
-    myRepo.UpdateExistingMyPhotoFancy(myPhotoFancy);
+    myRepo.UpdateExistingMyPhotoFancy(myPhotoFancyUpdateDTO);
     return Results.Ok();
 });
 

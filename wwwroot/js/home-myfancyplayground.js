@@ -62,7 +62,6 @@ const submitFancyPhoto = async function (singleMyPhotoFancyId) {
     var myUpdatedPhotoFancy = {
         id: singleMyPhotoFancyId,
         fancyBase64URL: "",
-        fancyTitle: "",
         fancyDescription: ""
 
     };

@@ -9,5 +9,5 @@ public interface IMyPhotoFancyRepository
     //                                 string newFancyBase64URL,
     //                                 string newFancyDescription);
 
-      void UpdateExistingMyPhotoFancy(MyPhotoFancy updatedMyPhotoFancy);
+      void UpdateExistingMyPhotoFancy(MyPhotoFancyUpdateDTO myPhotoFancyUpdateDTO);
 }
