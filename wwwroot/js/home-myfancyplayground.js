@@ -20,6 +20,51 @@ const myInitializeSignalRConnection = () => {
         .configureLogging(signalR.LogLevel.Information)
         .build();
 
+        mySignalRConnection.on("ReceiveMyPhotoFancyAfterCreate",
+                ({ id, fancyBase64URL, fancyTitle, fancyDescription}) => { 
+                   logToConsole(`Newly Added MyPhotoFancy Id: ${id}`);
+
+                  var tbody = document.querySelector("#myTable>tbody");
+                tbody.innerHTML += `<tr id="${id}-tr" class="align-middle">
+                                    <td>${fancyTitle}</td >
+                                    <td class="fw-bolder">
+                                       <span id="${id}-descriptionSpan">
+                                            ${fancyDescription}
+                                        </span>
+                                    </td >
+                                    <td>
+                                       <img src="${fancyBase64URL}"
+                                        alt="${fancyTitle} - ${fancyDescription}"
+                                        class="rounded mx-auto d-block MyPhotoFancyImage" id="${id}-imageOriginal">                      
+                                    </td>
+                                    <td>
+                                         <input type="file" id="${id}-input"
+                                            onchange="imageSelectionChanged(${id})"
+                                            accept="image/png, image/jpeg, image/jpg ,image/gif" />
+
+
+                                        <img id="${id}-image" src="${fancyBase64URL}"
+                                            alt="${fancyTitle} - New Photo"
+                                            class="rounded mx-auto d-block MyPhotoFancyImage border border-3 border-primary">
+
+                                        <button class="btn btn-primary disabled" type="button"
+                                            id="${id}-btnSubmitFancyPhoto"
+                                            onclick="submitFancyPhoto(${id})">
+                                            Submit New FancyPhoto
+                                        </button>
+                                        <div class="d-flex flex-column">
+                                            <span id="${id}-resultsSpan" class="fw-bolder"></span>
+                                        </div>
+                                    </td>
+                                    </tr>`;
+
+
+        
+        });
+
+
+
+
     mySignalRConnection.on("ReceiveNewMyPhotoFancy",
         ({ myPhotoFancyNotifyId, fancyBase64URL, fancyDescription }) => {
 
@@ -66,6 +111,39 @@ const btnAddNewFancyPhoto_click = async function(){
     else{
         //--Continue Add New
         txtSubmitNewResultsSpan.innerText = "";
+
+        var myNewPhotoFancyCreateDto = {
+            fancyTitle: "",
+            fancyBase64URL: "",
+            fancyDescription: ""
+        };
+
+        myNewPhotoFancyCreateDto.fancyTitle = txtAddItemTitle.value;
+        myNewPhotoFancyCreateDto.fancyDescription = "Submitted On: " + getCurrentDateFormated();
+        myNewPhotoFancyCreateDto.fancyBase64URL = imageAddItem.src;
+
+         const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify(myNewPhotoFancyCreateDto);
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch("/myphotofancycreate", requestOptions);
+
+        txtAddItemResultsSpan.innerHTML = "";
+        txtSubmitNewResultsSpan.innerHTML = "";
+        addItemFileinputElement.value = "";
+        txtAddItemTitle.value = "";
+        imageAddItem.src = "";
+        btnSubmitNew.className = "btn btn-primary disabled";
+
+
     };
 
 
@@ -73,7 +151,7 @@ const btnAddNewFancyPhoto_click = async function(){
 
 
 
-    
+
 }//--End-btnAddNewFancyPhoto_click()
 
 const addItemImageSelectionChanged = function(){

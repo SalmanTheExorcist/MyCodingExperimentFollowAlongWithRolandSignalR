@@ -63,7 +63,7 @@ app.MapPost("myphotofancycreate", (MyPhotoFancyCreateDTO myPhotoFancyCreateDTO,
                             IMyPhotoFancyRepository myRepo,
                             IHubContext<MySuperFancyHub> hubContext) =>
 {
-   var newMyPhotoFancy =  myRepo.AddNewMyPhotoFancy(myPhotoFancyCreateDTO);
+   MyPhotoFancy newMyPhotoFancy =  myRepo.AddNewMyPhotoFancy(myPhotoFancyCreateDTO);
     hubContext.Clients.All.SendAsync("ReceiveMyPhotoFancyAfterCreate", newMyPhotoFancy);
 });
 
