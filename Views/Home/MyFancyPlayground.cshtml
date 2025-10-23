@@ -33,9 +33,12 @@
             </thead>
             <tbody>
                 <tr class="MyAddNewItemRow">
-                    <td colspan="2"><input type="text" id="addItem-title" /></td>
+                    <td colspan="2">
+                        <input type="text" id="addItem-title" />
+                    </td>
                     <td>
                         <input type="file" id="addItem-fileinput"
+                          onchange="addItemImageSelectionChanged()"
                             accept="image/png, image/jpeg, image/jpg ,image/gif" />
 
 
@@ -48,9 +51,15 @@
                         </div>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary disabled" id="addItem-btnSubmitNew">
+                        <button type="button" 
+                                onclick="btnAddNewFancyPhoto_click()"
+                                class="btn btn-primary disabled" 
+                                id="addItem-btnSubmitNew">
                             Add
                         </button>
+                         <div class="d-flex flex-column">
+                            <span id="btnSubmitNew-resultsSpan" class="fw-bolder"></span>
+                        </div>
                     </td>
 
                 </tr>

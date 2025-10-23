@@ -48,7 +48,100 @@ const myInitializeSignalRConnection = () => {
 
 };
 const myConnection = myInitializeSignalRConnection();
+//------------------------------------------------------------------
 
+const btnAddNewFancyPhoto_click = async function(){
+    logToConsole("btnAddNewFancyPhoto_click()");
+
+    let txtAddItemResultsSpan = document.getElementById("addItem-resultsSpan");
+    let txtAddItemTitle = document.getElementById("addItem-title");
+    let addItemFileinputElement = document.getElementById("addItem-fileinput");
+    let btnSubmitNew = document.getElementById("addItem-btnSubmitNew");
+    let imageAddItem = document.getElementById("addItem-image");
+    let txtSubmitNewResultsSpan = document.getElementById("btnSubmitNew-resultsSpan");
+
+    if(txtAddItemTitle.value === ""){
+        txtSubmitNewResultsSpan.innerText = "Missing Item Title.";
+    }
+    else{
+        //--Continue Add New
+        txtSubmitNewResultsSpan.innerText = "";
+    };
+
+
+
+
+
+
+    
+}//--End-btnAddNewFancyPhoto_click()
+
+const addItemImageSelectionChanged = function(){
+
+    logToConsole("addItemImageSelectionChanged()");
+
+     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+    let imageFromInputFile = document.getElementById("addItem-image");
+    let txtResultsSpan = document.getElementById("addItem-resultsSpan");
+    let fileInputElement = document.getElementById("addItem-fileinput");
+    let btnSubmitFancyPhoto = document.getElementById("addItem-btnSubmitNew");
+    var strImageBase64 = "";
+    var boolFileIsGoodToGo = true;
+    var txtOutputMessage = "";
+
+     var singleFile = fileInputElement.files[0];
+    var singleFileName = singleFile.name.toLowerCase();
+    var singleFileExtension = singleFileName
+        .substring(singleFileName.lastIndexOf('.') + 1);
+
+
+
+    if (allowedExtensions.includes(singleFileExtension)) {
+        txtOutputMessage += "File extention is Good<br/>";
+        if (singleFile.size > 10000000) {
+            txtOutputMessage += "File Size Exceeds 10MB<br/>";
+            boolFileIsGoodToGo = false;
+        }
+    }
+    else {
+        txtOutputMessage += `File extension ${singleFileExtension} Not Allowed!`;
+        boolFileIsGoodToGo = false;
+    };
+
+    txtResultsSpan.innerHTML = txtOutputMessage;
+    //-------------------------------------
+
+    imageFromInputFile.src = "";
+    strImageBase64 = "";
+
+    if (boolFileIsGoodToGo) {
+        //Do more stuff with the selected File/Picture
+        var myFileReader = new FileReader();
+
+
+        myFileReader.onload = function (e) {
+            strImageBase64 = e.target.result;
+            imageFromInputFile.src = strImageBase64;
+        };
+        myFileReader.readAsDataURL(singleFile);
+
+        //--We can now enable the submit button
+        btnSubmitFancyPhoto.className = "btn btn-primary";
+
+    }
+    else {
+        //--disable the submit button
+        btnSubmitFancyPhoto.className = "btn btn-primary disabled";
+    };
+
+
+
+}//--End-addItemImageSelectionChanged()
+
+
+
+//-----------------------------------------------------------------
 
 const submitFancyPhoto = async function (singleMyPhotoFancyId) {
     logToConsole(`submitFancyPhoto(): ${singleMyPhotoFancyId}`);
