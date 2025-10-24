@@ -265,13 +265,21 @@ const submitFancyPhoto = async function (singleMyPhotoFancyId) {
 
     try {
        
-        await myConnection.invoke("NotifyNewMyPhotoFancy",
-            {
-                MyPhotoFancyNotifyId: parseInt(myUpdatedPhotoFancy.id),
-                FancyBase64URL: myUpdatedPhotoFancy.fancyBase64URL,
-                FancyDescription: myUpdatedPhotoFancy.fancyDescription
-            }
-        );
+        if(!myConnection.state === "Connected"){
+            location.reload();
+        }
+        else{
+              await myConnection.invoke("NotifyNewMyPhotoFancy",
+                {
+                    MyPhotoFancyNotifyId: parseInt(myUpdatedPhotoFancy.id),
+                    FancyBase64URL: myUpdatedPhotoFancy.fancyBase64URL,
+                    FancyDescription: myUpdatedPhotoFancy.fancyDescription
+                }
+            );
+            
+        };//--End-Else
+
+      
 
     } catch (err) {
         console.error(err);
