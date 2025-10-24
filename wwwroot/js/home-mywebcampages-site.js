@@ -12,6 +12,9 @@ const myInitializeSignalRConnection = function () {
             }
         )
         .configureLogging(signalR.LogLevel.Information)
+        .withHubProtocol(
+            new signalR.protocols.msgpack.MessagePackHubProtocol()
+        )
         .build();
 
 
