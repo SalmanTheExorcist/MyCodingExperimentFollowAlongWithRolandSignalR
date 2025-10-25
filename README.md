@@ -83,6 +83,149 @@ Course-Module-2
 
 ==>Transports and Negotiation:
 
-    -->
+	(A)--> WebSockets: The best transport option
+		--> Only transport that offers a true 2-way full-duplex connection between client and server that stays open.
+	------------------------------
+	
+	(B)-->"Server-Sent-Events (SSE)": Uses HTTP Requests 
+	-----------------------------------
+
+	(C)-->"Long Polling": For server to client messages, the client does an HTTP request to the server which remains open.
+--------------------------------------------------
+
+==>(Note) Update our code to disable transport-negotation, to force use of WebSockets (This is the best transport-option)
+
+	-->
+--------------------------------------------------
+
+Course-Module-3
+==>Server and Client Features:
+
+	-->Clients can be of any Application type (such as ConsoleApp)
+
+	-->Roland's Sample Apps on GitHub (different branches):
+	
+		--> git clone --branch OtherClients https://github.com/RolandGuijt/ps-globomantics-signalr.git
+
+		--> git clone --branch Start https://github.com/RolandGuijt/ps-globomantics-signalr.git
+
+		--> git clone --branch master https://github.com/RolandGuijt/ps-globomantics-signalr.git
+---------------------------------------------------------------------------
+
+==>For the Client Console App:
+
+	-->NuGet: Microsoft.AspNetCore.SignalR.Client
+-----------------------------------------------
+
+==>IHubContext and Caller:
+
+	--> Roland GitHub Repo for AddNewAuction: 
+		--> git clone --branch addnewauction https://github.com/RolandGuijt/ps-globomantics-signalr.git
+-----------------------------------
+
+==> Client Groups, Context and Connection IDs:
+
+	--> Roland GitHub Repo for "SignalR Client Groups":
+
+		-->  git clone --branch itemgroups https://github.com/RolandGuijt/ps-globomantics-signalr.git
+-----------------------------------------------
+
+==>Message Pack Hub Protocol and KeepAlive:
+
+	-->"Message Pack": A binary message protocol, alternative to JSON message. (more efficient than JSON Message)
+
+	-->NuGet package: Microsoft.AspNetCore.SignalR.Protocols.MessagePack
+
+		-->(dotnet-cli):  dotnet add package Microsoft.AspNetCore.SignalR.Protocols.MessagePack --version 8.0.21
+	--------------------------------------------
+
+	--> In the Program.cs:
+	----------------
+		builder.Services.AddSignalR(options =>
+    	{
+        options.EnableDetailedErrors = true;
+        options.MaximumReceiveMessageSize = 1024 * 1024 * 1024;
+        
+        
+    	}
+	).AddMessagePackProtocol();
+	-----------------------------------------------------
+		
+
+	-->JavaScript Library: @microsoft/signalr-protocol-msgpack
+
+		--> npm install @microsoft/signalr-protocol-msgpack
+	-----------------------------------------------------
+
+	-->Added in our .cshtml "Scripts" section:
+
+		--> <script src="~/lib/signalr-protocol-msgpack/dist/browser/signalr-protocol-msgpack.min.js"></script>
+	-----------------------------------------------------
+
+
+	-->
+
+==>Exceptions and Logging:
+
+	-->
+
+==>Design Considerations:
+
+	-->
+--------------------------------------------------------
+
+Course-Module-4
+==>Authentication and Authorization:
+
+==>Cookie Authentication:
+
+	--> Roland GitHub Repo CookieAuth:
+
+		-->  git clone --branch CookieAuth https://github.com/RolandGuijt/ps-globomantics-signalr.git
+-----------------------------------------------
+
+==>(dotnet-cli):
+
+	--> dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 8.0.21
+	-----------------------------------------------------
+
+	--> dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 8.0.21
+	---------------------------------------------------------
+
+	--> dotnet add package Microsoft.AspNetCore.Identity.UI --version 8.0.21
+	-----------------------------------------------------------
+
+	--> dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.21
+	------------------------------------------------------------
+
+	--> dotnet tool install --global dotnet-aspnet-codegenerator --version 8.0.7
+
+	--> dotnet tool install --global dotnet-ef --version 8.0.21
+-----------------------------------------------------------------------------------------------
+
+	--> dotnet aspnet-codegenerator identity -h
+	----------------------------------------------------
+	
+	--> 
+
+==>Token Based Authentication:
+
+	-->Roland GitHub Repo For TokenAuth:
+		--> git clone --branch TokenAuth https://github.com/RolandGuijt/ps-globomantics-signalr.git
+	---------------------------------------------------------
+
+	-->
+
+
+==>BFF (Backend-For-Frontend Pattern):
+
+	-->
+---------------------------------------------------------
+
+Course-Module-5
+==>Hosting and Scaling:
+
+	-->
+	
 ------------------------------------------------------
 
